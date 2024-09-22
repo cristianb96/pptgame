@@ -7,7 +7,7 @@ from app.models import Base, Player
 from app.config import db
 
 config = context.config
-database_url = "postgresql://postgres:1234@localhost:5432/TEST_1"
+database_url = "postgresql://mateo:Sanmiguel99+@pptgame.postgres.database.azure.com:5432/test"#"postgresql://postgres:1234@localhost:5432/TEST_1"
 config.set_main_option('sqlalchemy.url', database_url)
 
 target_metadata = db.Model.metadata  #Base.metadata
