@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piedra, Papel o Tijera Games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Piedra, Papel o Tijera Games</h1>
+    <form id="registerForm" method="POST" action="{{ url_for('register') }}">
+        <div>
+            <label for="p1">Jugador 1:</label>
+            <input type="text" id="p1" name="p1" placeholder="Nombre Completo" required maxlength="20" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" 
+            title="Solo se permiten letras y espacios.">
+        </div>
+        <br><br>
+        <div>
+            <label for="p2">Jugador 2:</label>
+            <input type="text" id="p2" name="p2" placeholder="Nombre Completo" required maxlength="20" pattern="^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$" 
+            title="Solo se permiten letras y espacios.">
+        </div>
+        <br><br>
+        <button type="submit">Iniciar Juego</button>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

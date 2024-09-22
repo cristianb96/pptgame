@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Piedra, Papel o Tijera Games</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Juego de Piedra, Papel o Tijera Games</h1>
+
+    <div id="n_round">
+        <h2>Ronda {{ n_r }}</h2>
+    </div>
+
+    {% if current_turn == 'player1' %}
+        <h2>Turno de {{ player1.name }}</h2>
+        <form id="moveForm" method="POST" action="{{ url_for('play', game_id=game.id) }}">
+            <label for="move1">Selecciona tu movimiento:</label>
+            <select id="move1" name="move1" required>
+                <option value="" selected>----------</option>
+                <option value="Piedra">Piedra</option>
+                <option value="Papel">Papel</option>
+                <option value="Tijera">Tijera</option>
+            </select>
+            <button type="submit">Enviar Movimiento</button>
+        </form>
+    {% elif current_turn == 'player2' %}
+        <h2>Turno de {{ player2.name }}</h2>
+        <form id="moveForm" method="POST" action="{{ url_for('play', game_id=game.id) }}">
+            <label for="move2">Selecciona tu movimiento:</label>
+            <select id="move2" name="move2" required>
+                <option value="" selected>----------</option>
+                <option value="Piedra">Piedra</option>
+                <option value="Papel">Papel</option>
+                <option value="Tijera">Tijera</option>
+            </select>
+            <button type="submit">Enviar Movimiento</button>
+        </form>
+    {% endif %}
+
+    <div id="round-results">
+        <h2>Resultados Parciales</h2>
+        <table id="round-results-table" border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th># de Ronda</th>
+                    <th>Ganador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in round_results %}
+                    <tr>
+                        <td>Ronda {{ result.round_number }}</td>
+                        <td>{{ result.winner_name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    
+    {% if game_over %}
+        <script>
+            function showEndGameAlert() {
+                Swal.fire({
+                    title: '¡Juego Terminado!.\nGanador: {{ player_win }}',
+                    text: '¿Deseas repetir el juego o iniciar uno nuevo?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Repetir Juego',
+                    cancelButtonText: 'Iniciar Nuevo Juego',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.post('/reset/{{ game.id }}', function() {
+                            window.location.href = '/play?game_id={{ game.id }}';
+                        });
+                    } else {
+                        window.location.href = '/register';
+                    }
+                });
+            }
+            showEndGameAlert();
+        </script>
+    {% endif %}
+</body>
+</html>
