@@ -1,13 +1,15 @@
+import os
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
-
+from dotenv import load_dotenv
 from app.models import Base, Player
 from app.config import db
 
+load_dotenv()
 config = context.config
-database_url = "postgresql://mateo:Sanmiguel99+@pptgame.postgres.database.azure.com:5432/test"#"postgresql://postgres:1234@localhost:5432/TEST_1"
+database_url = os.getenv("DATABASE_URI")#"postgresql://postgres:1234@localhost:5432/TEST_1"
 config.set_main_option('sqlalchemy.url', database_url)
 
 target_metadata = db.Model.metadata  #Base.metadata
