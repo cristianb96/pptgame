@@ -52,7 +52,7 @@ def register_routes(app):
             except Exception as e:
                 print(e)
                 return jsonify({"error": "Lo siento, no es posible registrarse. Intente mas tarde."}), 500
-        print("RC1 ", os.getenv("DATABASE_URL"))
+        print("RC1 ", os.getenv("CONNT_STRING"))
         return render_template('register.html')
 
 
