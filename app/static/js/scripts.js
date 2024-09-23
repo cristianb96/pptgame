@@ -29,6 +29,7 @@ document.getElementById('registerForm').addEventListener('submit', function (eve
         }
     })
     .catch(error => {
+        console.log(error)
         Swal.fire({
             icon: 'error',
             title: 'Error inesperado',
@@ -59,7 +60,6 @@ document.getElementById('moveForm').addEventListener('submit', function (event) 
         return response.json();
     })
     .then(data => {
-        // Manejar la respuesta exitosa
         if (data.success) {
         } else if (data.game_over) {
             Swal.fire({
