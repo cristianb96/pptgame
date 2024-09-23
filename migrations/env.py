@@ -9,7 +9,7 @@ from app.config import db
 
 load_dotenv()
 config = context.config
-database_url = os.getenv("DATABASE_URI")#"postgresql://postgres:1234@localhost:5432/TEST_1"
+database_url = os.getenv("DATABASE_URL")#"postgresql://postgres:1234@localhost:5432/TEST_1"
 config.set_main_option('sqlalchemy.url', database_url)
 
 target_metadata = db.Model.metadata  #Base.metadata
