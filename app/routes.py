@@ -5,6 +5,9 @@ from .config import db, Database
 import os
 from .utilities import Winner
 from .models import Game, GameRound, Player
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def register_routes(app):
     @app.route('/', methods=['GET'])
@@ -48,8 +51,8 @@ def register_routes(app):
             
             except Exception as e:
                 print(e)
-                return jsonify({"error": f"Ocurrió un error {str(e)}"}), 500
-            
+                return jsonify({"error": "Lo siento, no es posible registrarse. Intente mas tarde."}), 500
+        print("RC1 ", os.getenv("DATABASE_URL"))
         return render_template('register.html')
 
 
