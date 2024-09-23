@@ -17,3 +17,4 @@ class Database:
         print("RCV ",app.config['SQLALCHEMY_DATABASE_URI'])
         
         db.init_app(app)
+        print(app)
