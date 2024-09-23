@@ -48,7 +48,7 @@ def register_routes(app):
             
             except Exception as e:
                 print(e)
-                return jsonify({"error": "Ocurrió un error"}), 500
+                return jsonify({"error": f"Ocurrió un error {str(e)}"}), 500
             
         return render_template('register.html')
 
