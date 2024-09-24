@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from .exceptions import GameException
-from .selectors_ import InGame
+from .selects import InGame
 from .config import db, Database
 import os
 from .utilities import Winner
@@ -25,8 +25,8 @@ def register_routes(app):
                 if player1 == player2:
                     raise GameException('Los nombres son iguales')
                 
-                #if InGame.get_by_name(player1) or InGame.get_by_name(player2):
-                #    raise GameException('Uno de los jugadores ya existe')
+                if InGame.get_by_name(player1) or InGame.get_by_name(player2):
+                    raise GameException('Uno de los jugadores ya existe')
                 
                 InGame.add_player(player1)
                 InGame.add_player(player2)
