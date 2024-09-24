@@ -66,8 +66,6 @@ def register_routes(app):
             move2 = request.form.get('move2')
 
             if game.current_turn == 'player1':
-                #if not move1:
-                #    raise GameException("Jugador 1 debe seleccionar un movimiento.")  # 400
                 
                 InGame.update_game(game, move1=move1)
 
@@ -85,8 +83,6 @@ def register_routes(app):
                 )
 
             elif game.current_turn == 'player2':
-                #if not move2:
-                #    raise GameException("Jugador 2 debe seleccionar un movimiento.")  # 400
                 
                 InGame.update_game(game, move2=move2)
 

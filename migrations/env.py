@@ -9,13 +9,12 @@ from app.config import db
 
 load_dotenv()
 config = context.config
-database_url = os.getenv("CONNT_STRING")#"postgresql://postgres:1234@localhost:5432/TEST_1"
+database_url = os.getenv("CONNT_STRING")
 config.set_main_option('sqlalchemy.url', database_url)
 
 target_metadata = db.Model.metadata  #Base.metadata
 
 def run_migrations_offline():
-    """Ejecuta migraciones en modo offline."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url, target_metadata=target_metadata, literal_binds=True
@@ -25,7 +24,6 @@ def run_migrations_offline():
         context.run_migrations()
 
 def run_migrations_online():
-    """Ejecuta migraciones en modo online."""
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),
         prefix="sqlalchemy.",
